@@ -57,7 +57,7 @@ func (r *repository) UpdateEvent(id uint, event Event) (Event, error) {
 	}
 	return event, nil
 }
-func (r *repository) DeleteEvent(id uint) error {	
+func (r *repository) DeleteEvent(id uint) error {
 	if err := r.db.Delete(&Event{}, id).Error; err != nil {
 		log.Printf("Failed to delete event: %v", err)
 		return err
@@ -80,7 +80,7 @@ func (r *repository) GetEventsByDate(date time.Time) ([]Event, error) {
 	}
 	return events, nil
 }
-func (r *repository) GetEventsByLocation(location string) ([]Event, error) {	
+func (r *repository) GetEventsByLocation(location string) ([]Event, error) {
 	var events []Event
 	if err := r.db.Where("location = ?", location).Find(&events).Error; err != nil {
 		log.Printf("Failed to get events by location: %v", err)

@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 	// "net/http"
 	"github.com/gin-gonic/gin"
 	"github.com/jimohabdol/rest-api/internal/auth"
@@ -13,15 +14,22 @@ import (
 var db *gorm.DB
 
 func init() {
-	// Initialize any necessary configurations or dependencies here
-	// For example, you might want to set up a database connection or load environment variables.
+	// Load environment variables first
+	if err := common.LoadEnv(); err != nil {
+		log.Fatalf("Error loading environment variables: %v", err)
+	}
+
 	var err error
 	db, err = common.InitDB()
 	if err != nil {
-		log.Fatal("failed to connect database")
+		log.Fatalf("Failed to initialize database: %v", err)
 	}
-	db.AutoMigrate(&user.User{})
-	// , &event.Event{}, &booking.Booking{})
+
+	if err := db.AutoMigrate(&user.User{}); err != nil {
+		log.Fatalf("Failed to run migrations: %v", err)
+	}
+
+	log.Println("Database and environment successfully initialized!")
 }
 
 func main() {
@@ -29,7 +37,7 @@ func main() {
 	userRepo := user.NewRepository(db)
 	userService := user.NewService(userRepo)
 	userHandler := user.NewHandler(userService)
-	authService := auth.NewService("test", "test", userRepo)
+	authService := auth.NewService(os.Getenv("JWT_ACCESS_SECRET"), os.Getenv("JWT_REFESH_SECRET"), userRepo)
 	authMiddleware := auth.NewMiddleware(authService)
 	authHandler := auth.NewHandler(userService, authService)
 

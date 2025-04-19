@@ -1,14 +1,15 @@
 package event
 
 import (
-	"time"
-	"net/http"
 	"github.com/gin-gonic/gin"
+	"net/http"
+	"time"
 )
 
 type Handler struct {
 	service Service
 }
+
 func NewHandler(service Service) *Handler {
 	return &Handler{service: service}
 }
@@ -35,7 +36,7 @@ func (h *Handler) CreateEvent(c *gin.Context) {
 		"event":   createdEvent,
 	})
 }
-func (h *Handler) GetEventByID(c *gin.Context) {	
+func (h *Handler) GetEventByID(c *gin.Context) {
 	id := c.GetUint("id")
 	event, err := h.service.GetEventByID(id)
 	if err != nil {

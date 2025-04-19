@@ -1,8 +1,8 @@
 package booking
 
 import (
-	"time"
 	"gorm.io/gorm"
+	"time"
 )
 
 type Repository interface {
@@ -22,6 +22,7 @@ type Repository interface {
 type repository struct {
 	db *gorm.DB
 }
+
 func NewRepository(db *gorm.DB) Repository {
 	return &repository{db: db}
 }

@@ -20,18 +20,18 @@ type Booking struct {
 }
 
 type BookingResponse struct {
-	ID            uint              `json:"id"`
-	EventID       uint              `json:"event_id"`
+	ID            uint                `json:"id"`
+	EventID       uint                `json:"event_id"`
 	Event         event.EventResponse `json:"event"`
-	UserID        uint              `json:"user_id"`
-	User          user.UserResponse `json:"user"`
-	BookingDate   time.Time         `json:"booking_date"`
-	BookingStatus string            `json:"booking_status"`
-	PaymentStatus string            `json:"payment_status"`
-	Tickets       int               `json:"tickets"`
-	CreatedAt     time.Time         `json:"created_at"`
-	UpdatedAt     time.Time         `json:"updated_at"`
-	DeletedAt     gorm.DeletedAt    `json:"deleted_at" gorm:"index"`
+	UserID        uint                `json:"user_id"`
+	User          user.UserResponse   `json:"user"`
+	BookingDate   time.Time           `json:"booking_date"`
+	BookingStatus string              `json:"booking_status"`
+	PaymentStatus string              `json:"payment_status"`
+	Tickets       int                 `json:"tickets"`
+	CreatedAt     time.Time           `json:"created_at"`
+	UpdatedAt     time.Time           `json:"updated_at"`
+	DeletedAt     gorm.DeletedAt      `json:"deleted_at" gorm:"index"`
 }
 type CreateBookingRequest struct {
 	EventID       uint      `json:"event_id" binding:"required"`

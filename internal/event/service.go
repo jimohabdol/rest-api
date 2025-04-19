@@ -123,7 +123,7 @@ func (s *service) GetEventsByUserID(userID uint) ([]EventResponse, error) {
 
 	return eventResponses, nil
 }
-func (s *service) GetEventsByDate(date time.Time) ([]EventResponse, error) {	
+func (s *service) GetEventsByDate(date time.Time) ([]EventResponse, error) {
 	events, err := s.repo.GetEventsByDate(date)
 	if err != nil {
 		return nil, err

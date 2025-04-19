@@ -49,6 +49,7 @@ type UpdateEventRequest struct {
 	Capacity    int       `json:"capacity"`
 	UserID      uint      `json:"user_id"`
 }
+
 func ToEventResponse(event Event) EventResponse {
 	return EventResponse{
 		ID:          event.ID,
