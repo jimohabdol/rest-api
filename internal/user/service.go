@@ -1,7 +1,6 @@
 package user
 
 import (
-	"errors"
 	"github.com/jimohabdol/rest-api/internal/common"
 )
 
@@ -32,10 +31,18 @@ func (s *service) CreateUser(user CreateUserRequest) (UserResponse, error) {
 		IsAdmin:   user.IsAdmin,
 	}
 
+	if common.IsFIeldEmpty(newUser.FirstName) || common.IsFIeldEmpty(newUser.LastName) || common.IsFIeldEmpty(newUser.Password) || common.IsFIeldEmpty(newUser.Email) {
+		return UserResponse{}, common.ErrEmptyField
+	}
+
+	if !common.IsValidEmail(newUser.Email) {
+		return UserResponse{}, common.ErrInvalidEmail
+	}
+
 	createdUser, err := s.repo.CreateUser(newUser)
 	if err != nil {
 		if err.Error() == "email already exists" {
-			return UserResponse{}, errors.New("email already exists")
+			return UserResponse{}, common.ErrEmailAlreadyExists
 		}
 		return UserResponse{}, err
 	}
