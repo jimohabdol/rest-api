@@ -19,7 +19,7 @@ var (
 	ErrInternalServer     = errors.New("internal server error")
 	ErrBadRequest         = errors.New("bad request")
 	ErrInvalidEmail       = errors.New("invalid email format")
-	ErrEmptyField		  = errors.New("field cannot be empty")
+	ErrEmptyField         = errors.New("field cannot be empty")
 )
 
 type ErrorResponse struct {

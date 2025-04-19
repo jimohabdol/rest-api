@@ -50,7 +50,6 @@ func main() {
 	authMiddleware := auth.NewMiddleware(authService)
 	authHandler := auth.NewHandler(userService, authService)
 
-
 	server := gin.Default()
 	// server.Use(gin.Logger())
 	contextPath := server.Group("/api/v1")

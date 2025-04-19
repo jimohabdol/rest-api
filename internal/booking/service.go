@@ -46,7 +46,7 @@ func (s *service) CreateBooking(booking CreateBookingRequest) (BookingResponse, 
 
 	if strings.TrimSpace(booking.BookingStatus) == "" {
 		return BookingResponse{}, errors.New("booking status cannot be empty")
-	}else if common.IsValidStatus(booking.BookingStatus) == false {
+	} else if common.IsValidStatus(booking.BookingStatus) == false {
 		return BookingResponse{}, errors.New("invalid booking status")
 	}
 
@@ -132,7 +132,7 @@ func (s *service) GetBookingsByUserID(userID uint) ([]BookingResponse, error) {
 
 	return bookingResponses, nil
 }
-func (s *service) GetBookingsByEventID(eventID uint) ([]BookingResponse, error) {	
+func (s *service) GetBookingsByEventID(eventID uint) ([]BookingResponse, error) {
 	bookings, err := s.repo.GetBookingsByEventID(eventID)
 	if err != nil {
 		return nil, err

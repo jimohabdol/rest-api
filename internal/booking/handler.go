@@ -8,7 +8,7 @@ import (
 )
 
 type Handler struct {
-	service    Service
+	service Service
 }
 
 func NewHandler(service Service) *Handler {
@@ -64,8 +64,8 @@ func (h *Handler) GetAllBookings(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"message": "success",
-		"code":    0,
+		"message":  "success",
+		"code":     0,
 		"bookings": bookings,
 	})
 }
@@ -119,8 +119,8 @@ func (h *Handler) GetBookingsByUserID(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"message": "success",
-		"code":    0,
+		"message":  "success",
+		"code":     0,
 		"bookings": bookings,
 	})
 }
@@ -135,8 +135,8 @@ func (h *Handler) GetBookingsByEventID(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"message": "success",
-		"code":    0,
+		"message":  "success",
+		"code":     0,
 		"bookings": bookings,
 	})
 }
@@ -159,8 +159,8 @@ func (h *Handler) GetBookingsByDate(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"message": "success",
-		"code":    0,
+		"message":  "success",
+		"code":     0,
 		"bookings": bookings,
 	})
 }

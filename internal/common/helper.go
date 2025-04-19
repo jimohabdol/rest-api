@@ -19,7 +19,7 @@ func CheckPasswordHash(password, hash string) error {
 
 func IsValidStatus(status string) bool {
 	validStatus := map[string]bool{
-		"pending":  true,
+		"pending":   true,
 		"confirmed": true,
 		"cancelled": true,
 	}
@@ -27,10 +27,10 @@ func IsValidStatus(status string) bool {
 }
 
 func IsValidEmail(email string) bool {
-    _, err := mail.ParseAddress(email)
-    return err == nil // If there's no error, email is valid
+	_, err := mail.ParseAddress(email)
+	return err == nil // If there's no error, email is valid
 }
 
 func IsFIeldEmpty(field string) bool {
-    return len(field) == 0
+	return len(field) == 0
 }
