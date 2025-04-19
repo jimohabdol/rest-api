@@ -22,14 +22,17 @@ func (h *Handler) CreateUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Invalid request",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
 	createdUser, err := h.service.CreateUser(user)
 	if err != nil {
+		log.Println("Error creating user:", err)
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to create user",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -47,6 +50,7 @@ func (h *Handler) GetUserByID(c *gin.Context) {
 		c.JSON((http.StatusNotFound), gin.H{
 			"message": `User with ID ${id} not found`,
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -64,6 +68,7 @@ func (h *Handler) GetUserByEmail(c *gin.Context) {
 		c.JSON((http.StatusNotFound), gin.H{
 			"message": `User with email ${email} not found`,
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -81,6 +86,7 @@ func (h *Handler) UpdateUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Invalid request",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -89,6 +95,7 @@ func (h *Handler) UpdateUser(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to update user",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -105,6 +112,7 @@ func (h *Handler) GetAllUsers(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to get users",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -122,6 +130,7 @@ func (h *Handler) DeleteUser(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to delete user",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}

@@ -46,7 +46,7 @@ func (s *service) CreateBooking(booking CreateBookingRequest) (BookingResponse, 
 
 	if strings.TrimSpace(booking.BookingStatus) == "" {
 		return BookingResponse{}, errors.New("booking status cannot be empty")
-	} else if common.IsValidStatus(booking.BookingStatus) == false {
+	} else if !common.IsValidStatus(booking.BookingStatus) {
 		return BookingResponse{}, errors.New("invalid booking status")
 	}
 
@@ -91,7 +91,7 @@ func (s *service) UpdateBooking(id uint, booking UpdateBookingRequest) (BookingR
 	if booking.UserID != 0 {
 		existingBooking.UserID = booking.UserID
 	}
-	if booking.BookingDate.IsZero() == false {
+	if !booking.BookingDate.IsZero() {
 		existingBooking.BookingDate = booking.BookingDate
 	}
 	if strings.TrimSpace(booking.BookingStatus) != "" {

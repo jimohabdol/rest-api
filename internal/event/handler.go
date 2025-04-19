@@ -19,6 +19,7 @@ func (h *Handler) CreateEvent(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Invalid request",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -27,6 +28,7 @@ func (h *Handler) CreateEvent(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to create event",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -43,6 +45,7 @@ func (h *Handler) GetEventByID(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{
 			"message": "Event not found",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -58,6 +61,7 @@ func (h *Handler) GetAllEvents(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to retrieve events",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -74,6 +78,7 @@ func (h *Handler) UpdateEvent(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Invalid request",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -82,6 +87,7 @@ func (h *Handler) UpdateEvent(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to update event",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -98,6 +104,7 @@ func (h *Handler) DeleteEvent(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to delete event",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -112,6 +119,7 @@ func (h *Handler) GetEventByDate(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Date query parameter is required",
 			"code":    -1,
+			"error":   "Date query parameter is required",
 		})
 		return
 	}
@@ -120,6 +128,7 @@ func (h *Handler) GetEventByDate(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Invalid date format",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -128,6 +137,7 @@ func (h *Handler) GetEventByDate(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{
 			"message": "Event not found",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}

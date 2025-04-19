@@ -79,6 +79,7 @@ func (h *Handler) Register(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to create user",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}

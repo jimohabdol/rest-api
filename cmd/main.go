@@ -28,9 +28,13 @@ func init() {
 		log.Fatalf("Failed to initialize database: %v", err)
 	}
 
-	if err := db.AutoMigrate(&user.User{}); err != nil {
-		log.Fatalf("Failed to run migrations: %v", err)
-	}
+	// if err := db.AutoMigrate(
+	// 	&user.User{},
+	// 	&event.Event{},
+	// 	&booking.Booking{},
+	// ); err != nil {
+	// 	log.Fatalf("Failed to run migrations: %v", err)
+	// }
 
 	log.Println("Database and environment successfully initialized!")
 }

@@ -1,6 +1,8 @@
 package user
 
 import (
+	"log"
+
 	"github.com/jimohabdol/rest-api/internal/common"
 )
 
@@ -36,6 +38,7 @@ func (s *service) CreateUser(user CreateUserRequest) (UserResponse, error) {
 	}
 
 	if !common.IsValidEmail(newUser.Email) {
+		log.Printf("Invalid email format: %s", newUser.Email)
 		return UserResponse{}, common.ErrInvalidEmail
 	}
 
@@ -52,7 +55,7 @@ func (s *service) CreateUser(user CreateUserRequest) (UserResponse, error) {
 func (s *service) GetUserByID(id uint) (UserResponse, error) {
 	user, err := s.repo.GetUserByID(id)
 	if err != nil {
-		return UserResponse{}, err
+		return UserResponse{}, common.ErrUserNotFound
 	}
 
 	return ToUserResponse(user), nil

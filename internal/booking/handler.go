@@ -20,6 +20,7 @@ func (h *Handler) CreateBooking(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Invalid request",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -28,6 +29,7 @@ func (h *Handler) CreateBooking(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to create booking",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -45,6 +47,7 @@ func (h *Handler) GetBookingByID(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{
 			"message": "Booking not found",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -60,6 +63,7 @@ func (h *Handler) GetAllBookings(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to retrieve bookings",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -76,6 +80,7 @@ func (h *Handler) UpdateBooking(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Invalid request",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -84,6 +89,7 @@ func (h *Handler) UpdateBooking(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to update booking",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -100,6 +106,7 @@ func (h *Handler) DeleteBooking(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to delete booking",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -115,6 +122,7 @@ func (h *Handler) GetBookingsByUserID(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to retrieve bookings",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -131,6 +139,7 @@ func (h *Handler) GetBookingsByEventID(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to retrieve bookings",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -147,6 +156,7 @@ func (h *Handler) GetBookingsByDate(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "Invalid date format",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
@@ -155,6 +165,7 @@ func (h *Handler) GetBookingsByDate(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Failed to retrieve bookings",
 			"code":    -1,
+			"error":   err.Error(),
 		})
 		return
 	}
