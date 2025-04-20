@@ -55,7 +55,7 @@ func main() {
 	authHandler := auth.NewHandler(userService, authService)
 
 	server := gin.Default()
-	// server.Use(gin.Logger())
+	server.Use(common.LatencyLogMiddleWare())
 	contextPath := server.Group("/api/v1")
 
 	// Auth routes
@@ -104,3 +104,4 @@ func main() {
 
 	server.Run(":8080")
 }
+
