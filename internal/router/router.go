@@ -58,4 +58,3 @@ func BookingRouter(r *gin.RouterGroup, h *booking.Handler, authMiddleWare *auth.
 		//bookingPath.GET("bookings/status/:status", h.GetBookingsByStatus)
 	}
 }
-

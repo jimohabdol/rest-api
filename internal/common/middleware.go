@@ -2,10 +2,10 @@ package common
 
 import (
 	"fmt"
-	"time"
-	"net/http"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"net/http"
+	"time"
 )
 
 func LatencyLogMiddleWare() gin.HandlerFunc {
@@ -14,26 +14,26 @@ func LatencyLogMiddleWare() gin.HandlerFunc {
 		uuid := uuid.New()
 		startTime := time.Now()
 		c.Set("uuid", uuid)
-		
+
 		// Log request start with method and path
-		fmt.Printf("[%s] %s %s started at %v\n", 
-			uuid, 
-			c.Request.Method, 
-			c.Request.URL.Path, 
+		fmt.Printf("[%s] %s %s started at %v\n",
+			uuid,
+			c.Request.Method,
+			c.Request.URL.Path,
 			startTime.Format(time.RFC3339))
-		
+
 		c.Next()
-		
+
 		// Calculate latency and log completion
 		latency := time.Since(startTime).Milliseconds()
-		fmt.Printf("[%s] %s %s completed in %dms | Status: %d | Completed at %v\n", 
+		fmt.Printf("[%s] %s %s completed in %dms | Status: %d | Completed at %v\n",
 			uuid,
 			c.Request.Method,
 			c.Request.URL.Path,
 			latency,
 			c.Writer.Status(),
 			time.Now().Format(time.RFC3339))
-			
+
 	}
 }
 

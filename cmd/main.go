@@ -52,8 +52,8 @@ func main() {
 	bookingService := booking.NewService(bookingRepo)
 	bookingHandler := booking.NewHandler(bookingService)
 	authService := auth.NewService(
-		os.Getenv("JWT_ACCESS_SECRET"), 
-		os.Getenv("JWT_REFESH_SECRET"), 
+		os.Getenv("JWT_ACCESS_SECRET"),
+		os.Getenv("JWT_REFESH_SECRET"),
 		userRepo,
 	)
 	authMiddleware := auth.NewMiddleware(authService)
@@ -81,4 +81,3 @@ func main() {
 
 	server.Run(":8080")
 }
-
