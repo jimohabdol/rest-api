@@ -10,6 +10,7 @@ import (
 	"github.com/jimohabdol/rest-api/internal/booking"
 	"github.com/jimohabdol/rest-api/internal/common"
 	"github.com/jimohabdol/rest-api/internal/event"
+	"github.com/jimohabdol/rest-api/internal/health"
 	"github.com/jimohabdol/rest-api/internal/router"
 	"github.com/jimohabdol/rest-api/internal/user"
 	"gorm.io/gorm"
@@ -42,6 +43,9 @@ func init() {
 
 func main() {
 	log.Println(db)
+	healthRepo := health.NewRepository(db)
+	healthService := health.NewService(healthRepo)
+	healthHandler := health.NewHandler(healthService)
 	userRepo := user.NewRepository(db)
 	userService := user.NewService(userRepo)
 	userHandler := user.NewHandler(userService)
@@ -63,6 +67,9 @@ func main() {
 	server.Use(common.LatencyLogMiddleWare())
 	contextPath := server.Group("/api/v1")
 
+	// Health routes
+	router.HealthCheckerRouter(contextPath, healthHandler)
+
 	// Auth routes
 	router.AuthRouter(contextPath, authHandler)
 	// User routes
@@ -71,13 +78,6 @@ func main() {
 	router.EvenRouter(contextPath, eventHandler, authMiddleware)
 	// Booking routes
 	router.BookingRouter(contextPath, bookingHandler, authMiddleware)
-	// Health check route
-	contextPath.GET("/healthz", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Server is running",
-			"code":    0,
-		})
-	})
 
 	server.Run(":8080")
 }

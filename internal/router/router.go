@@ -5,6 +5,7 @@ import (
 	"github.com/jimohabdol/rest-api/internal/auth"
 	"github.com/jimohabdol/rest-api/internal/booking"
 	"github.com/jimohabdol/rest-api/internal/event"
+	"github.com/jimohabdol/rest-api/internal/health"
 	"github.com/jimohabdol/rest-api/internal/user"
 )
 
@@ -57,4 +58,11 @@ func BookingRouter(r *gin.RouterGroup, h *booking.Handler, authMiddleWare *auth.
 		bookingRoutes.GET("bookings/date/:date", h.GetBookingsByDate)
 		//bookingPath.GET("bookings/status/:status", h.GetBookingsByStatus)
 	}
+}
+
+func HealthCheckerRouter(r *gin.RouterGroup, h *health.Handler) {
+	healthRoutes := r.Group("/actuator")
+	
+	healthRoutes.GET("/health", h.GetHealthCheck)
+	healthRoutes.GET("/info", h.GetInfo)
 }
